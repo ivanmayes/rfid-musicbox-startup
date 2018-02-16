@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  form
+    label(for="ssid") SSID:
+    input.ssid(type="text", name="ssid", placeholder="MyNetworkName")
+    label(for="pass") Password:
+    input.password(type="password", name="pass")
+    br
+    br
+  button.submit Save Changes
+  

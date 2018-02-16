@@ -2,18 +2,28 @@ extends layout
 
 block content
   form
-    label(for="ssid") Select a Network:
-    select.ssiddropdown
-      option(value="") Loading networks...
-    button.scan Rescan
-    br
-    label(for="ssid") Or manually type one in:
-    input.ssid(type="text", name="ssid", placeholder="MyNetworkName")
-    br
-    br
-    label(for="pass") Password:
-    input.password(type="password", name="pass")
-    br
-    br
-  button.submit Save Changes
-  
+    .form-group
+      label.mr(for="ssid") Select a Network:
+      select.ssiddropdown.mr
+        option(value="") Loading networks...
+      button.scan.btn.btn-default Rescan
+    .form-group
+      label(for="ssid") Or manually type one in:
+      input.ssid.form-control(type="text", name="ssid", placeholder="ex. MyNetworkName")
+    .form-group
+      label(for="pass") Password:
+      input.password.form-control(type="password", name="pass", placeholder="ex. Network Password")
+
+  button.btn.btn-primary(type="button").submit Save Changes
+
+  p.errors
+
+  .modal.saved.fade
+    .modal-dialog(role="document")
+      .modal-content
+        .modal-header
+          button.close(type="button")
+            span ×
+          h4.title Wifi Configuration Saved!
+        .modal-body
+          p Your device will restart within 5 - 10 seconds and attempt to connect to the network. If the device fails, you can reconnect to this screen to try again.

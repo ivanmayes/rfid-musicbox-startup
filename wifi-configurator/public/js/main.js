@@ -1,6 +1,9 @@
 $(document).ready(() => {
 
     scan();
+
+    let dropdown = $('.ssiddropdown');
+    let modal = $('.modal');
     
     // Scan for Wifi Networks
     $('.scan').click((ev) => {
@@ -12,8 +15,6 @@ $(document).ready(() => {
     $('.submit').click((ev) => {
         ev.preventDefault();
 
-
-        let dropdown = $('.ssiddropdown');
         let ssid = $('.ssid').val();
         let password = $('.password').val();
 
@@ -28,12 +29,16 @@ $(document).ready(() => {
 
         $.post('/wifi/set', wifi)
             .done((data) => {
-                console.log('Success!', data);
+                modal.addClass('in');
             })
             .fail((err) => {
                 console.log('Failed', err);
             });
 
+    });
+
+    $('.modal .close').click(() => {
+        modal.removeClass('in');
     });
     
 });

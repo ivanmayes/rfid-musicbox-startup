@@ -56,7 +56,7 @@ network={
                 message: 'Wifi saved successfully!'
             });
 
-            linuxExec.reboot();
+            setTimeout(() => linuxExec.reboot(), 5000);
         });
         
     }

@@ -5834,6 +5834,14 @@ footer {
   footer p, footer ul {
     margin-bottom: 0; }
 
+.modal {
+  background: rgba(0, 0, 0, 0.5); }
+  .modal.in {
+    display: block; }
+
+.mr {
+  margin-right: 10px; }
+
 textarea {
   resize: vertical; }
 

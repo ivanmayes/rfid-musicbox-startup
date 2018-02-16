@@ -25,6 +25,18 @@ footer {
   }
 }
 
+.modal {
+  background: rgba(0,0,0,0.5);
+
+  &.in {
+    display: block;
+  }
+}
+
+.mr {
+  margin-right: 10px;
+}
+
 // Input Fields
 // -------------------------
 

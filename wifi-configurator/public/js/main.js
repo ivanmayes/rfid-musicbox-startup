@@ -1,17 +1,30 @@
 $(document).ready(() => {
+
+    scan();
     
+    // Scan for Wifi Networks
+    $('.scan').click((ev) => {
+        ev.preventDefault();
+        scan();
+    });
+
+    // Set Wifi
     $('.submit').click((ev) => {
         ev.preventDefault();
 
+
+        let dropdown = $('.ssiddropdown');
         let ssid = $('.ssid').val();
         let password = $('.password').val();
 
         let wifi = {
-            ssid: ssid,
+            ssid: dropdown.val(),
             password: password
         };
 
-        console.log('POSTING', wifi);
+        if (ssid) {
+            wifi.ssid = ssid;
+        }
 
         $.post('/wifi/set', wifi)
             .done((data) => {
@@ -24,3 +37,18 @@ $(document).ready(() => {
     });
     
 });
+
+function scan() {
+    $.get('/wifi/scan')
+        .done((res) => {
+            let html = '<option value="">No Network Selected</option>';
+            if (res.data) {
+                res.data.forEach(network => html += `<option value="${network.ssid}">${network.ssid}</option>`);
+            }
+
+            $('.ssiddropdown').html(html);
+        })
+        .fail((err) => {
+            console.log('Failed', err);
+        });
+}

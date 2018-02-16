@@ -6,7 +6,7 @@ router.post('/set', (req, res) => {
     wifiController.set(req, res);
 });
 
-router.post('/scan', (req, res) => {
+router.get('/scan', (req, res) => {
     wifiController.scan(req, res);
 });
 

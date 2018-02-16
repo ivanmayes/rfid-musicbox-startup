@@ -2,8 +2,15 @@ extends layout
 
 block content
   form
-    label(for="ssid") SSID:
+    label(for="ssid") Select a Network:
+    select.ssiddropdown
+      option(value="") Loading networks...
+    button.scan Rescan
+    br
+    label(for="ssid") Or manually type one in:
     input.ssid(type="text", name="ssid", placeholder="MyNetworkName")
+    br
+    br
     label(for="pass") Password:
     input.password(type="password", name="pass")
     br

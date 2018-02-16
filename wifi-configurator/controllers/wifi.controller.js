@@ -1,5 +1,7 @@
 import logger from '../core/logger/app-logger';
-import { linuxExec } from '../core/linux/exec';
+import linuxExec from '../core/linux/exec';
+import wifiscanner from 'node-wifiscanner';
+import _ from 'lodash';
 const fs = require('fs');
 
 const controller = {};
@@ -7,10 +9,21 @@ const controller = {};
 controller.scan = async (req, res) => {
     try {
         // Write to Javascript
-        res.send({
-            status: 'success',
-            message: 'Wifi saved successfully!'
-        });
+        wifiscanner.scan((err, data) => {
+            if (err) {
+                res.send({
+                    message: err,
+                    status: 'error'
+                });
+                return;
+            }
+
+            res.send({
+                data: data.filter(uniqFilterAccordingToProp('ssid')),
+                status: 'success'
+            });
+        })
+        
     }
     catch(err) {
         res.send({
@@ -43,7 +56,7 @@ controller.set = async (req, res) => {
                 message: 'Wifi saved successfully!'
             });
 
-            exec.reboot();
+            linuxExec.reboot();
         });
         
     }
@@ -56,3 +69,10 @@ controller.set = async (req, res) => {
 }
 
 export default controller;
+
+const uniqFilterAccordingToProp = function (prop) {
+    if (prop)
+        return (ele, i, arr) => arr.map(ele => ele[prop]).indexOf(ele[prop]) === i
+    else
+        return (ele, i, arr) => arr.indexOf(ele) === i
+}

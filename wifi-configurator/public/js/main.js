@@ -4,6 +4,7 @@ $(document).ready(() => {
 
     let dropdown = $('.ssiddropdown');
     let modal = $('.modal');
+    let errorContainer = $('.errors');
     
     // Scan for Wifi Networks
     $('.scan').click((ev) => {
@@ -33,6 +34,7 @@ $(document).ready(() => {
             })
             .fail((err) => {
                 console.log('Failed', err);
+                errors.html(err);
             });
 
     });
@@ -54,6 +56,6 @@ function scan() {
             $('.ssiddropdown').html(html);
         })
         .fail((err) => {
-            console.log('Failed', err);
+            errors.html(err);
         });
 }

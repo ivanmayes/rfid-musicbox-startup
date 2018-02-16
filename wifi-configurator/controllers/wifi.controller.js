@@ -36,14 +36,14 @@ controller.scan = async (req, res) => {
 controller.set = async (req, res) => {
     try {
         let txt = `
-            ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
-            update_config=1
-            country=GB
-            
-            network={
-                   ssid="${req.body.ssid}"
-                   psk="${req.body.password}"
-            }
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=GB
+
+network={
+        ssid="${req.body.ssid}"
+        psk="${req.body.password}"
+}
         `;
 
         fs.writeFile('/etc/wpa_supplicant/wpa_supplicant.conf', txt, (err) => {  

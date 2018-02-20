@@ -42,6 +42,12 @@ app.get('/', (req, res) => {
     });
 });
 
+app.use((req, res) => {
+    res.status(301).render('index', {
+        title: 'Home'
+    });
+});
+
 app.listen(port, () => {
     logger.info('server started - ', port);
 });

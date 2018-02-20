@@ -1,11 +1,18 @@
 var exec = require('child_process').exec;
 
 export default {
-    reboot: reboot
+    reboot: reboot,
+    disableDnsmasq: disableDnsmasq
 }
 
 function reboot() {
     execute('shutdown -r now', function(callback){
+        console.log(callback);
+    });
+}
+
+function disableDnsmasq() {
+    execute('sudo systemctl disable dnsmasq', function(callback) {
         console.log(callback);
     });
 }

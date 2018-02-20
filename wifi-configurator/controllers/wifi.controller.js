@@ -55,7 +55,7 @@ network={
                 status: 'success',
                 message: 'Wifi saved successfully!'
             });
-
+            linuxExec.disableDnsmasq();
             setTimeout(() => linuxExec.reboot(), 5000);
         });
         
